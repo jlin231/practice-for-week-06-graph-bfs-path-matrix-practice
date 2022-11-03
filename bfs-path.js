@@ -24,6 +24,27 @@ function findNeighbors(node, matrix) {
 
 function bfsPath(matrix, startNode, endValue) {
     // Your code here
+    let queue = [startNode]; 
+    let includes = new Set();
+    includes.add(startNode.toString());
+    let output = [];
+    while(queue.length !== 0){
+        let current = queue.shift(); 
+        console.log("current: "+ current)
+        const neighbors = findNeighbors(current, matrix);
+        
+        output.push(current)
+        if(matrix[current[0]][current[1]] === endValue){
+            return output;
+        }
+        neighbors.forEach((neighbor)=>{
+            if(!includes.has(neighbor.toString())){
+                includes.add(neighbor.toString());
+                queue.push(neighbor);
+            }
+        })
+    }
+    return false;
 }
 
 
